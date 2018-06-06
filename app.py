@@ -7,7 +7,7 @@ from NbaAbbrevs import abbrevs
 app = Flask(__name__)
 
 
-@app.route("/sms", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def sms_reply():
     """Respond to incoming calls with a simple text message."""
 
@@ -23,7 +23,6 @@ def sms_reply():
     for k in abbrevs.keys():
         if in_msg in abbrevs[k]:
             team_name = abbrevs[k][2].capitalize()
-            #team_name.capitalize()
             full_name = k if k == "LA Clippers" or k == "LA Lakers" else k + " " + team_name
 
             if k in game_info:
