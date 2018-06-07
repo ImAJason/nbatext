@@ -10,7 +10,7 @@ class ScrapeNba:
 
     def get_data(self, date):
 
-        link = "http://scores.nbcsports.com/nba/scoreboard.asp?day="+date+"&meta=true
+        link = "http://scores.nbcsports.com/nba/scoreboard.asp?day="+date+"&meta=true"
 
         response = requests.get(link)
         sourceCode = response.content
