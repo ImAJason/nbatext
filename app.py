@@ -31,8 +31,7 @@ def sms_reply():
                 resp.message(a + "\n" + b + "\n" + c)
                 return str(resp)
             else:
-                #resp.message("The " + full_name + " have no game scheduled for today")
-                resp.message(current_date)
+                resp.message("The " + full_name + " have no game scheduled for today")
                 return str(resp)
 
     resp.message("Not a valid team name")
