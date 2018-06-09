@@ -19,11 +19,24 @@ class ScrapeNba:
         scrape_teams = htmlElem.xpath("//table/tr/td[@class='shsNamD']/a")
         teams = [str(s.text_content()) for s in scrape_teams]
 
-        scrape_status = htmlElem.xpath("//table/tr[@class='shsTableTtlRow']//td[@class='shsTeamCol shsNamD']")
-        status = [str(s.text_content()) for s in scrape_status]
+        valid_quarters = ['1', '2', '3', '4', 'Tot', 'OT', '2OT', '3OT', '4OT', '5OT', '6OT', '7OT']
 
-        scrape_quarters = htmlElem.xpath("//table/tr[@class='shsTableTtlRow']//td[@class='shsTotD']")
-        quarters = ['0'] + [str(s.text_content()) for s in scrape_quarters]
+        scrape_status_quarter = htmlElem.xpath("//table/tr[@class='shsTableTtlRow']/td")
+        statuses, quarters = [], ['0']
+        i = 0
+        while i < len(scrape_status_quarter):
+            if len(scrape_status_quarter[i].text_content()) > 15:
+                x = "play at " + scrape_status_quarter[i].text_content()[:10]
+                statuses.append(x)
+                quarters += ['1', '2', '3', '4', 'Tot']
+                i += 2
+            else:
+                x = scrape_status_quarter[i].text_content()
+                if x not in valid_quarters:
+                    statuses.append(x)
+                if x in valid_quarters:
+                    quarters.append(x)
+                i += 1
 
         # get corresponding scores for teams
 
@@ -51,11 +64,11 @@ class ScrapeNba:
             team_score = teams[i] + " : " + str(tot_scores[i])
             team_scores.append(team_score)
 
-        all_games = [[] for _ in range(len(status))]
+        all_games = [[] for _ in range(len(statuses))]
 
         ## add status
-        for i in range(len(status)):
-            all_games[i].append(status[i])
+        for i in range(len(statuses)):
+            all_games[i].append(statuses[i])
 
         ## add teamscores
 

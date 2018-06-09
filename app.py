@@ -6,10 +6,8 @@ from NbaAbbrevs import abbrevs
 
 app = Flask(__name__)
 
-
 @app.route("/", methods=['GET', 'POST'])
 def sms_reply():
-    """Respond to incoming calls with a simple text message."""
 
     from_number = request.values.get('From', None)
     from_body = request.values.get('Body', None)
@@ -27,9 +25,12 @@ def sms_reply():
 
             if k in game_info:
                 a, b, c = game_info[k]
-                #resp.message(a, '\n', b, '\n', c)
-                resp.message(a + "\n" + b + "\n" + c)
-                return str(resp)
+                if a.startswith("play at"):
+                    resp.message("The " + full_name + " " + a)
+                    return str(resp)
+                else:
+                    resp.message(a + "\n" + b + "\n" + c)
+                    return str(resp)
             else:
                 resp.message("The " + full_name + " have no game scheduled for today")
                 return str(resp)
@@ -37,10 +38,8 @@ def sms_reply():
     resp.message("Not a valid team name")
     return str(resp)
 
-
 if __name__ == '__main__':
     app.run(debug=True)
-    #app.run(debug=True, port=5000, host="localhost")
 
 
 
