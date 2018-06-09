@@ -45,7 +45,7 @@ class ScrapeNba:
 
         for i in range(len(scores)):
             if scores[i] == "\xa0":
-                scores[i] = "Game has not started yet"
+                scores[i] = "N/A"
 
         total_indices = [i for i, x in enumerate(quarters) if x == "Tot" or x == 'tot']
         tot_scores = []
