@@ -1,5 +1,5 @@
 # nbatext
-Quick NBA game scorecheck - Send a text with the team or city and get the score sent to you.  
+Quick NBA game scorecheck - Send a text with the team or city and immediately get the score texted back to you.  
 
 2018 NBA Finals(Game 3 & Game 4):
 
