@@ -10,7 +10,7 @@ Jinja2==2.10
 lxml==4.2.1
 MarkupSafe==1.0
 multidict==4.1.0
-PyJWT==1.6.4
+PyJWT==2.4.0
 PySocks==1.6.8
 pytz==2018.4
 requests==2.18.4
